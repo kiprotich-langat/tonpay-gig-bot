@@ -1,0 +1,36 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# TON smart contracts
+*.boc
+*.fc
+*.fif
+*.tlb
+
+# VS Code
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs and temp
+*.log
+*.tmp
+
+# Secrets
+.env
+*.key
+*.pem
+
+# Node.js (if used)
+node_modules/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/

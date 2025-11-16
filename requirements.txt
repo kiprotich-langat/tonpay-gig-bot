@@ -1,0 +1,7 @@
+aiogram==3.3.0
+requests==2.31.0
+python-dotenv==1.0.0
+pytoniq==0.1.38
+pytoniq-core==0.1.35
+tonsdk==1.0.15
+pynacl
