@@ -1,4 +1,3 @@
-# tonpay-gig-bot
 # TONPay Gig Bot
 
 A Telegram-based freelance marketplace powered by TON blockchain. Post gigs, apply for tasks, and complete deals securely with blockchain-backed escrow—all inside Telegram.
@@ -7,21 +6,21 @@ A Telegram-based freelance marketplace powered by TON blockchain. Post gigs, app
 [![Python](https://img.shields.io/badge/Python-3.12+-blue)](https://python.org)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-## 🎯 Overview
+##  Overview
 
 TONPay Gig Bot bridges clients and freelancers through Telegram with secure, blockchain-backed payments. The platform integrates gig creation, proposals, smart contract escrow, dispute resolution, ratings, and transaction history into a seamless bot experience.
 
 ### Key Highlights
 
-- **🔒 Smart Contract Escrow** - Payments locked on-chain until work is verified
-- **⚡ Instant Settlements** - TON blockchain ensures fast, low-cost transactions  
-- **🤖 Native Telegram** - No external websites or apps needed
-- **🛡️ Dispute Protection** - Built-in mediation system with admin oversight
-- **⭐ Reputation System** - Ratings and feedback build trust over time
+- ** Smart Contract Escrow** - Payments locked on-chain until work is verified
+- ** Instant Settlements** - TON blockchain ensures fast, low-cost transactions  
+- ** Native Telegram** - No external websites or apps needed
+- ** Dispute Protection** - Built-in mediation system with admin oversight
+- ** Reputation System** - Ratings and feedback build trust over time
 
 ---
 
-## ✨ Features
+##  Features
 
 ### For Clients
 - Post gigs with title, description, and TON budget
@@ -46,7 +45,7 @@ TONPay Gig Bot bridges clients and freelancers through Telegram with secure, blo
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 
@@ -164,7 +163,7 @@ DATABASE_PATH=tonpay.db
 
 ---
 
-## 🏗️ Project Structure
+##  Project Structure
 
 ```
 tonpay-gig-bot/
@@ -184,7 +183,7 @@ tonpay-gig-bot/
 
 ---
 
-## 🔗 TON Blockchain Integration
+##  TON Blockchain Integration
 
 ### Smart Contract Architecture
 
@@ -217,11 +216,11 @@ ton_manager = TONWalletManager(use_testnet=True)
 ton_manager = TONWalletManager(use_testnet=False)
 ```
 
-> ⚠️ **Important**: Always test on testnet first. Mainnet transactions use real TON and cannot be reversed.
+>  **Important**: Always test on testnet first. Mainnet transactions use real TON and cannot be reversed.
 
 ---
 
-## 💾 Database Schema
+##  Database Schema
 
 ### Tables Overview
 
@@ -253,7 +252,7 @@ ton_manager = TONWalletManager(use_testnet=False)
 
 ---
 
-## 🔐 Security & Best Practices
+##  Security & Best Practices
 
 ### Built-in Protections
 - ✅ Smart contract escrow prevents payment disputes
@@ -272,7 +271,7 @@ ton_manager = TONWalletManager(use_testnet=False)
 
 ---
 
-## 📊 Monitoring & Maintenance
+##  Monitoring & Maintenance
 
 ### View Logs
 ```bash
@@ -293,7 +292,243 @@ python3 ton_wallet_manager.py  # Tests TON connection
 
 ---
 
-## 🧪 Testing
+##  Deployment
+
+### Deploying to Production
+
+#### Option 1: VPS Deployment (Recommended)
+
+**1. Prepare Your Server**
+```bash
+# Update system
+sudo apt update && sudo apt upgrade -y
+
+# Install Python 3.12+
+sudo apt install python3.12 python3.12-venv python3-pip git -y
+```
+
+**2. Clone and Setup**
+```bash
+# Clone repository
+git clone https://github.com/kiprotich-langat/tonpay-gig-bot.git
+cd tonpay-gig-bot
+
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+**3. Configure Environment**
+```bash
+# Create .env file
+nano .env
+```
+
+Add your production configuration:
+```env
+BOT_TOKEN=your_production_bot_token
+ADMIN_WALLET_MNEMONIC=your 24 word mnemonic here
+USE_TESTNET=False
+DATABASE_PATH=/home/user/tonpay-gig-bot/tonpay.db
+LOG_LEVEL=INFO
+```
+
+**4. Run with systemd (Auto-restart)**
+
+Create service file:
+```bash
+sudo nano /etc/systemd/system/tonpay-bot.service
+```
+
+Add configuration:
+```ini
+[Unit]
+Description=TONPay Gig Bot
+After=network.target
+
+[Service]
+Type=simple
+User=your_username
+WorkingDirectory=/home/your_username/tonpay-gig-bot
+Environment="PATH=/home/your_username/tonpay-gig-bot/venv/bin"
+ExecStart=/home/your_username/tonpay-gig-bot/venv/bin/python bot_production.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Enable and start:
+```bash
+sudo systemctl enable tonpay-bot
+sudo systemctl start tonpay-bot
+sudo systemctl status tonpay-bot
+```
+
+**5. Monitor Logs**
+```bash
+sudo journalctl -u tonpay-bot -f
+```
+
+#### Option 2: Screen/tmux (Simple)
+
+```bash
+# Install screen
+sudo apt install screen -y
+
+# Start in screen session
+screen -S tonpay
+cd tonpay-gig-bot
+source venv/bin/activate
+python3 bot_production.py
+
+# Detach: Ctrl+A then D
+# Reattach: screen -r tonpay
+```
+
+#### Option 3: Docker Deployment
+
+**Create Dockerfile:**
+```dockerfile
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD ["python", "bot_production.py"]
+```
+
+**Create docker-compose.yml:**
+```yaml
+version: '3.8'
+
+services:
+  tonpay-bot:
+    build: .
+    container_name: tonpay-gig-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./tonpay.db:/app/tonpay.db
+      - ./logs:/app/logs
+```
+
+**Deploy:**
+```bash
+docker-compose up -d
+docker-compose logs -f
+```
+
+### Pre-Deployment Checklist
+
+Before going live on mainnet:
+
+- [ ] ✅ Tested thoroughly on testnet
+- [ ] ✅ Admin wallet funded with sufficient TON (minimum 2-3 TON)
+- [ ] ✅ Backup `.env` file and mnemonic securely
+- [ ] ✅ Set `USE_TESTNET=False` in production
+- [ ] ✅ Configure proper logging and monitoring
+- [ ] ✅ Setup automated backups for `tonpay.db`
+- [ ] ✅ Verify bot commands work correctly
+- [ ] ✅ Test escrow deployment end-to-end
+- [ ] ✅ Enable systemd auto-restart
+- [ ] ✅ Setup alerts for bot downtime
+
+### Security for Production
+
+**1. Secure Your Server**
+```bash
+# Setup firewall
+sudo ufw allow 22
+sudo ufw enable
+
+# Create dedicated user
+sudo adduser tonpay
+sudo su - tonpay
+```
+
+**2. Protect Sensitive Files**
+```bash
+chmod 600 .env
+chmod 600 tonpay.db
+```
+
+**3. Regular Backups**
+```bash
+# Automated daily backup
+crontab -e
+```
+
+Add:
+```cron
+0 2 * * * cp /home/user/tonpay-gig-bot/tonpay.db /home/user/backups/tonpay-$(date +\%Y\%m\%d).db
+```
+
+**4. Monitor Bot Health**
+
+Use a monitoring service:
+- **UptimeRobot** - Free uptime monitoring
+- **Better Stack** - Log aggregation
+- **Prometheus + Grafana** - Advanced metrics
+
+### Updating the Bot
+
+```bash
+# Stop bot
+sudo systemctl stop tonpay-bot
+
+# Backup database
+cp tonpay.db tonpay.db.backup
+
+# Pull updates
+git pull origin main
+
+# Reinstall dependencies if needed
+source venv/bin/activate
+pip install -r requirements.txt --upgrade
+
+# Restart bot
+sudo systemctl start tonpay-bot
+sudo systemctl status tonpay-bot
+```
+
+### Cost Estimates
+
+**Monthly VPS (e.g., DigitalOcean, Hetzner, Linode):**
+- Basic: $5-10/month (1GB RAM, sufficient for 100-500 users)
+- Standard: $15-20/month (2GB RAM, 1000+ users)
+
+**TON Mainnet Costs:**
+- Contract deployment: ~0.05-0.1 TON per gig
+- Transaction fees: ~0.01-0.02 TON per operation
+- Recommended admin wallet: 2-5 TON buffer
+
+**Example for 50 gigs/month:**
+- Deployment: 5 TON
+- Operations: 1 TON
+- **Total: ~6 TON/month** (~$30-40 depending on TON price)
+
+### Recommended VPS Providers
+
+| Provider | Starting Price | Region | Good For |
+|----------|---------------|--------|----------|
+| [Hetzner](https://hetzner.com) | €4.51/mo | EU | Best value |
+| [DigitalOcean](https://digitalocean.com) | $6/mo | Global | Easy setup |
+| [Linode](https://linode.com) | $5/mo | Global | Reliable |
+| [Vultr](https://vultr.com) | $6/mo | Global | Fast deployment |
+
+---
+
+##  Testing
 
 ### Verify Installation
 ```bash
@@ -318,7 +553,7 @@ python3 bot_production.py
 
 ---
 
-## 🛠️ Troubleshooting
+##  Troubleshooting
 
 ### Common Issues
 
@@ -342,7 +577,7 @@ python3 bot_production.py
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions are welcome! To contribute:
 
@@ -363,7 +598,7 @@ pip install -r requirements.txt
 
 ---
 
-## 📬 Contact & Support
+##  Contact & Support
 
 - **Telegram**: [@bytes_kip](https://t.me/bytes_kip)
 - **Email**: kiprotichlangat@proton.me
@@ -377,7 +612,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 Built with:
 - [Aiogram](https://github.com/aiogram/aiogram) - Telegram Bot Framework
@@ -385,11 +620,11 @@ Built with:
 - [pytoniq](https://github.com/yungwine/pytoniq) - TON Python Library
 - SQLite - Embedded Database
 
-Created for the TON ecosystem and Ignyte challenge.
+
 
 ---
 
-## ⭐ Star History
+
 
 If you find this project useful, please consider giving it a star! ⭐
 
@@ -397,4 +632,4 @@ If you find this project useful, please consider giving it a star! ⭐
 
 ---
 
-**Made with ❤️ for the TON Community**
+**Made with love for the TON Community**
