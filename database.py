@@ -1,5 +1,3 @@
-
-
 import sqlite3
 import logging
 from datetime import datetime
@@ -521,4 +519,5 @@ class Database:
         """Close database connection"""
         if self.conn:
             self.conn.close()
+
             self.conn = None
