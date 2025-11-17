@@ -1,4 +1,3 @@
-
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram import types, F
 from database import Database
@@ -26,7 +25,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Silence the noisy TON client logs
 logging.getLogger('LiteClient').setLevel(logging.WARNING)  # Only show warnings/errors
 logging.getLogger('pytoniq').setLevel(logging.WARNING)
 logging.getLogger('pytoniq_core').setLevel(logging.WARNING)
@@ -1276,3 +1274,4 @@ async def main():
 if __name__ == "__main__":
 
     asyncio.run(main())
+
