@@ -1,6 +1,3 @@
-"""
-TONPay Gig Bot 
-"""
 
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram import types, F
@@ -1277,4 +1274,5 @@ async def main():
             logger.info("TON connection closed")
 
 if __name__ == "__main__":
+
     asyncio.run(main())
