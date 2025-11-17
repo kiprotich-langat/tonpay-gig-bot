@@ -1,7 +1,3 @@
-"""
-TONPay Wallet Manager 
-"""
-
 import asyncio
 import logging
 import os
@@ -709,4 +705,5 @@ async def test_wallet_manager():
 
 if __name__ == "__main__":
     asyncio.run(test_wallet_manager())
+
 
