@@ -17,7 +17,7 @@ load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_WALLET_MNEMONIC = os.getenv("ADMIN_WALLET_MNEMONIC")
 
-# Configure logging
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -1274,4 +1274,5 @@ async def main():
 if __name__ == "__main__":
 
     asyncio.run(main())
+
 
