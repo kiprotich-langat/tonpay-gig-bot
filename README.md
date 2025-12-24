@@ -100,7 +100,7 @@ DATABASE_PATH=tonpay.db
 
 ---
 
-## 📱 Using the Bot
+##  Using the Bot
 
 ### Client Workflow
 
@@ -255,12 +255,12 @@ ton_manager = TONWalletManager(use_testnet=False)
 ##  Security & Best Practices
 
 ### Built-in Protections
-- ✅ Smart contract escrow prevents payment disputes
-- ✅ No private keys stored in database or logs
-- ✅ All TON transactions recorded on-chain
-- ✅ Wallet address validation before deployment
-- ✅ Permission checks on all critical operations
-- ✅ Comprehensive error handling and logging
+-  Smart contract escrow prevents payment disputes
+-  No private keys stored in database or logs
+-  All TON transactions recorded on-chain
+-  Wallet address validation before deployment
+-  Permission checks on all critical operations
+-  Comprehensive error handling and logging
 
 ### User Safety Guidelines
 - Never share your wallet mnemonic
@@ -286,7 +286,7 @@ sqlite3 tonpay.db "SELECT * FROM gigs WHERE status='in_progress';"
 
 ### Health Check
 ```python
-python3 -c "from database import Database; db = Database(); print('✅ DB OK')"
+python3 -c "from database import Database; db = Database(); print(' DB OK')"
 python3 ton_wallet_manager.py  # Tests TON connection
 ```
 
@@ -432,16 +432,16 @@ docker-compose logs -f
 
 Before going live on mainnet:
 
-- [ ] ✅ Tested thoroughly on testnet
-- [ ] ✅ Admin wallet funded with sufficient TON (minimum 2-3 TON)
-- [ ] ✅ Backup `.env` file and mnemonic securely
-- [ ] ✅ Set `USE_TESTNET=False` in production
-- [ ] ✅ Configure proper logging and monitoring
-- [ ] ✅ Setup automated backups for `tonpay.db`
-- [ ] ✅ Verify bot commands work correctly
-- [ ] ✅ Test escrow deployment end-to-end
-- [ ] ✅ Enable systemd auto-restart
-- [ ] ✅ Setup alerts for bot downtime
+- [ ]  Tested thoroughly on testnet
+- [ ]  Admin wallet funded with sufficient TON (minimum 2-3 TON)
+- [ ]  Backup `.env` file and mnemonic securely
+- [ ]  Set `USE_TESTNET=False` in production
+- [ ]  Configure proper logging and monitoring
+- [ ]  Setup automated backups for `tonpay.db`
+- [ ]  Verify bot commands work correctly
+- [ ]  Test escrow deployment end-to-end
+- [ ]  Enable systemd auto-restart
+- [ ]  Setup alerts for bot downtime
 
 ### Security for Production
 
@@ -606,7 +606,7 @@ pip install -r requirements.txt
 
 ---
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
